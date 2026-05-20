@@ -1,0 +1,12 @@
+.venv/
+credentials.json
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.DS_Store
+*.egg-info/
+dist/
+build/

@@ -1,0 +1,5 @@
+pandas==3.0.3
+gspread==6.2.1
+google-auth==2.53.0
+python-dotenv==1.2.2
+pytest==9.0.3
