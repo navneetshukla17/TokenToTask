@@ -42,14 +42,24 @@ def test_bug_attributed_within_30_days_same_epic():
     assert result[0].bugs_attributed == 1
 
 
-def test_bug_attributed_within_30_days_same_sprint():
+def test_bug_attributed_within_30_days_same_sprint_and_epic():
+    metrics = [_make_metric("dev@cashflo.io")]
+    deliverables_by_email = {
+        "dev@cashflo.io": [_make_deliverable("dev@cashflo.io", "2026-05-01", "Sprint 12", "EP-1")]
+    }
+    bugs = [_make_bug("other@cashflo.io", "2026-05-20", "Sprint 12", "EP-1")]
+    result = attribute_bugs(metrics, deliverables_by_email, bugs)
+    assert result[0].bugs_attributed == 1
+
+
+def test_bug_not_attributed_same_sprint_different_epic():
     metrics = [_make_metric("dev@cashflo.io")]
     deliverables_by_email = {
         "dev@cashflo.io": [_make_deliverable("dev@cashflo.io", "2026-05-01", "Sprint 12", "EP-1")]
     }
     bugs = [_make_bug("other@cashflo.io", "2026-05-20", "Sprint 12", "EP-DIFFERENT")]
     result = attribute_bugs(metrics, deliverables_by_email, bugs)
-    assert result[0].bugs_attributed == 1
+    assert result[0].bugs_attributed == 0
 
 
 def test_bug_not_attributed_outside_30_days():

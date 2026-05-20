@@ -19,7 +19,7 @@ def attribute_bugs(
                 if 0 <= days_diff <= BUG_WINDOW_DAYS:
                     same_epic = bool(story.epic_key and bug.epic_key and story.epic_key == bug.epic_key)
                     same_sprint = bool(story.sprint and bug.sprint and story.sprint == bug.sprint)
-                    if same_epic or same_sprint:
+                    if same_epic and same_sprint:
                         attributed += 1
                         break  # count each bug once per developer
         metric.bugs_attributed = attributed
