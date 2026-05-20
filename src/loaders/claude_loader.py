@@ -8,11 +8,11 @@ def load_claude_csv(path: str) -> Dict[str, dict]:
     Excludes API key rows (rows where email has no @).
     """
     df = pd.read_csv(path)
-    df.columns = df.columns.str.strip()
+    df.columns = df.columns.str.strip().str.lower()
     df = df.rename(columns={
-        "Members": "email",
-        "Spend this month": "spend_raw",
-        "Lines this month": "lines_raw",
+        "members": "email",
+        "spend this month": "spend_raw",
+        "lines this month": "lines_raw",
     })
     df["email"] = df["email"].astype(str).str.strip().str.lower()
     df = df[df["email"].str.contains("@", na=False)]
