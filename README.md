@@ -53,7 +53,7 @@ The CLI is the core engine. It takes four CSV files, runs the metrics computatio
 
 ### Architecture
 
-![CLI ETL Pipeline Architecture](./docs/cli_architecture.png)
+![CLI ETL Pipeline Architecture](./images/cli_architecture.svg)
 
 ### What it does
 
@@ -113,7 +113,7 @@ The web app wraps the CLI pipeline in a proper product. It adds persistent stora
 
 ### Architecture
 
-![Web Application Architecture](./docs/webapp_architecture.png)
+![Web Application Architecture](./docs/webapp_architecture.svg)
 
 ### Stack
 
