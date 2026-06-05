@@ -15,3 +15,8 @@ build/
 .vscode/
 *.swp
 *.swo
+dashboard.db
+temp_uploads/
+data_drop/
+frontend/node_modules/
+frontend/dist/

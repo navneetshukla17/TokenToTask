@@ -27,6 +27,38 @@ def attribute_bugs(
     return metrics
 
 
+def attribute_bugs_detailed(
+    metrics: List[DeveloperMetrics],
+    deliverables_by_email: Dict[str, List[Deliverable]],
+    bugs: List[Bug],
+) -> tuple[List[DeveloperMetrics], List[dict]]:
+    attributed_details = []
+    for metric in metrics:
+        dev_deliverables = deliverables_by_email.get(metric.email, [])
+        attributed = 0
+        for bug in bugs:
+            for story in dev_deliverables:
+                days_diff = (bug.created_date - story.resolved_date).days
+                if 0 <= days_diff <= BUG_WINDOW_DAYS:
+                    same_epic = bool(story.epic_key and bug.epic_key and story.epic_key == bug.epic_key)
+                    same_sprint = bool(story.sprint and bug.sprint and story.sprint == bug.sprint)
+                    if same_epic and same_sprint:
+                        attributed += 1
+                        attributed_details.append({
+                            "email": metric.email,
+                            "bug_key": bug.issue_key,
+                            "epic_key": bug.epic_key,
+                            "sprint": bug.sprint,
+                            "created_date": bug.created_date.isoformat(),
+                            "resolved_date": story.resolved_date.isoformat(),
+                            "story_key": story.issue_key
+                        })
+                        break  # count each bug once per developer
+        metric.bugs_attributed = attributed
+        metric.bug_rate = attributed / metric.deliverables_count if metric.deliverables_count > 0 else None
+    return metrics, attributed_details
+
+
 def apply_flags(metrics: List[DeveloperMetrics]) -> List[DeveloperMetrics]:
     efficiency_scores = [m.ai_efficiency_score for m in metrics if m.ai_efficiency_score is not None]
     bug_rates = [m.bug_rate for m in metrics if m.bug_rate is not None]
