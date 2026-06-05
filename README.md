@@ -9,7 +9,7 @@
 [![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)](https://sqlite.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-[🚀 Live Demo](https://dashboard-poc.cashflo.io) &nbsp;·&nbsp; [📋 The Problem PRD](./The%20problem_%20Developer-Productivity-Dashboard-PRD.pdf) &nbsp;·&nbsp; [📋 Web App PRD](./WebApp_%20Developer-Dashboard-PRD.pdf) &nbsp;·&nbsp; [🐛 Report a Bug](https://github.com/navneetshukla17/TokenToTask/issues)
+[🚀 Live Demo](https://dashboard-poc.cashflo.io) &nbsp;·&nbsp; [📋 Problem PRD](./PRDs/Problem-PRD.pdf) &nbsp;·&nbsp; [📋 Web App PRD](./PRDs/WebApp-PRD.pdf) &nbsp;·&nbsp; [📋 Final PRD](./PRDs/Final-PRD.pdf) &nbsp;·&nbsp; [🐛 Report a Bug](https://github.com/navneetshukla17/TokenToTask/issues)
 
 > ⚠️ **Honest disclaimer:** This is a Proof of Concept. It works. It produces real, useful metrics. But it is held together by manual CSV exports from two external systems — Claude Console and Jira — that we do not control. If either changes their export format, this breaks. We know. That's what v3 is for.
 
@@ -38,9 +38,9 @@ We went through three rounds of product thinking to get here. Each document solv
 
 | # | Document | Purpose |
 |---|---|---|
-| 1 | [**The Problem PRD**](./The%20problem_%20Developer-Productivity-Dashboard-PRD.pdf) | Defines the business problem — AI adoption with no measurement layer. Scopes what data we have, what we need, and why joining Claude Console + Jira is the right move. |
-| 2 | [**Web App PRD**](./WebApp_%20Developer-Dashboard-PRD.pdf) | Translates the problem into a product spec. Covers the v1 CLI, its limitations, and the case for a web interface with CSV upload, weekly/monthly views, and per-developer profiles. |
-| 3 | [**Unified MVP PRD (Final)**](./WebApp_%20Developer-Dashboard-PRD.pdf) | The definitive spec. Resolves conflicts between the first two (web upload vs. server directory, weekly vs. monthly), introduces the weekly spend scaling fallback, and adds the settings/configuration layer. |
+| 1 | [**Problem PRD**](./PRDs/Problem-PRD.pdf) | Defines the business problem — AI adoption with no measurement layer. Scopes what data we have, what we need, and why joining Claude Console + Jira is the right move. |
+| 2 | [**Web App PRD**](./PRDs/WebApp-PRD.pdf) | Translates the problem into a product spec. Covers the v1 CLI, its limitations, and the case for a web interface with CSV upload, weekly/monthly views, and per-developer profiles. |
+| 3 | [**Final PRD (Unified MVP)**](./PRDs/Final-PRD.pdf) | The definitive spec. Resolves conflicts between the first two (web upload vs. server directory, weekly vs. monthly), introduces the weekly spend scaling fallback, and adds the settings/configuration layer. |
 
 ### Why three PRDs?
 
@@ -52,13 +52,13 @@ Because the product changed as we understood the data better. The first document
 
 ### v1 — CLI ETL Pipeline
 
-<img src="./images/cli_architecture.svg" width="800" alt="CLI ETL Pipeline Architecture"/>
+<img src="./images/cli_architecture.png" width="800" alt="CLI ETL Pipeline Architecture"/>
 
 The CLI is the core engine. It takes four CSV files, runs metrics computation in-memory, and writes a single `output.csv` — one row per developer. No server, no database, no UI.
 
 ### v2 — React + FastAPI Web Application
 
-<img src="./images/webapp_architecture.svg" width="800" alt="Web Application Architecture"/>
+<img src="./images/webapp_architecture.png" width="800" alt="Web Application Architecture"/>
 
 The web app wraps the CLI pipeline in a proper product. The full stack: React SPA → HTTPS/JSON → FastAPI (Uvicorn) → pandas CSV engine → SQLite + filesystem.
 
