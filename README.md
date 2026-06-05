@@ -52,13 +52,13 @@ Because the product changed as we understood the data better. The first document
 
 ### v1 — CLI ETL Pipeline
 
-<img src="./docs/cli_architecture.png" width="800" alt="CLI ETL Pipeline Architecture"/>
+<img src="./images/cli_architecture.png" width="800" alt="CLI ETL Pipeline Architecture"/>
 
 The CLI is the core engine. It takes four CSV files, runs metrics computation in-memory, and writes a single `output.csv` — one row per developer. No server, no database, no UI.
 
 ### v2 — React + FastAPI Web Application
 
-<img src="./docs/webapp_architecture.png" width="800" alt="Web Application Architecture"/>
+<img src="./images/webapp_architecture.png" width="800" alt="Web Application Architecture"/>
 
 The web app wraps the CLI pipeline in a proper product. The full stack: React SPA → HTTPS/JSON → FastAPI (Uvicorn) → pandas CSV engine → SQLite + filesystem.
 
