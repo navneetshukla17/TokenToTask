@@ -113,7 +113,7 @@ The web app wraps the CLI pipeline in a proper product. It adds persistent stora
 
 ### Architecture
 
-![Web Application Architecture](./docs/webapp_architecture.svg)
+![Web Application Architecture](./images/webapp_architecture.svg)
 
 ### Stack
 
